@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Соискатели</h1>
+    {{ example }}
+    <hr>
+        {% for v in workers %}
+            <div>{{ v.name }} - {{ v.need_salary }}</div>
+        {% endfor %}
+</body>
+</html>

@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from .models import Vacancy
+from .models import Company
 
 # Create your views here.
 def homepage(request):
@@ -32,3 +33,11 @@ def vacancy_list(request):
     context = {"vacancies": vacancies}
     context["example"] = "hello"
     return render(request, 'vacancies.html', context)
+
+
+def company_list(request):
+    companies = Company.objects.all()
+    context = {"companies": companies}
+    # context["example"] = "hello"
+
+    return render(request, 'companies.html', context)
