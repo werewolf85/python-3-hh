@@ -18,3 +18,6 @@ class Company(models.Model):
     is_hunting = models.BooleanField(default=True)
     def __str__(self):
         return self.name_company
+
+
+
