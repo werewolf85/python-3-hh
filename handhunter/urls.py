@@ -28,4 +28,6 @@ urlpatterns = [
     path('vacancies/', vacancy_list),
     path('companies/', company_list),
     path('workers/', worker_list),
+    path('worker/<int:id>/', worker_info),
+
 ]
