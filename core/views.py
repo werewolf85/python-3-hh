@@ -1,6 +1,7 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from .models import Vacancy
 from .models import Company
+from django.contrib.auth.models import User
 
 # Create your views here.
 def homepage(request):
@@ -31,7 +32,7 @@ def address(request):
 def vacancy_list(request):
     vacancies = Vacancy.objects.all()
     context = {"vacancies": vacancies}
-    context["example"] = "hello"
+    # context["example"] = "hello"
     return render(request, 'vacancies.html', context)
 
 
@@ -56,3 +57,46 @@ def search(request):
     vacancy_list = Vacancy.objects.filter(title__contains=word)
     context = {"vacancies": vacancy_list}
     return render(request, 'vacancies.html', context)
+def reg_view(request):
+    if request == "POST":
+        user = User(
+            username=request.POST["username"]
+        )
+        user.save()
+        user.set_password(request.POST["password"])
+        user.save()
+        return HttpResponse('Готово!')
+
+    return render(
+        request,
+        "auth/registr.html"
+    )
+
+def vacancy_add(request):
+    if request.method == "POST":
+        new_vacancy = Vacancy(
+            title=request.POST["title"],
+            salary=int(request.POST["salary"]),
+            description=request.POST["description"],
+            email=request.POST["email"],
+            contacts=request.POST["contacts"],
+        )
+        new_vacancy.save()
+        return redirect(f'/vacancy/{new_vacancy.id}/')
+    return render(request, 'vacancy/vacancy_form.html')
+
+
+def vacancy_edit(request, id):
+    vacancy = Vacancy.objects.get(id=id)
+    if request.method == "POST":
+        vacancy.title = request.POST["title"]
+        vacancy.salary = int(request.POST["salary"])
+        vacancy.description = request.POST["description"]
+        vacancy.email = request.POST["email"]
+        vacancy.contacts = request.POST["contacts"]
+        vacancy.save()
+        return redirect(f'/vacancy/{vacancy.id}/')
+    return render(
+        request, 'vacancy/vacancy_edit_form.html',
+        {"vacancy": vacancy}
+    )
