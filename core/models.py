@@ -1,8 +1,9 @@
+# Create your models here.
 from django.db import models
 from worker.models import Worker
-from django.db import models
-from django.contrib.auth.models import User
-# Create your models here.
+
+
+
 class Vacancy(models.Model):
     title = models.CharField(max_length=255)
     salary = models.IntegerField(null=True, blank=True)
@@ -13,10 +14,30 @@ class Vacancy(models.Model):
     candidate = models.ManyToManyField(
         to=Worker,
         blank=True,
-
     )
+    category = models.ForeignKey(
+        to='Category',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        verbose_name='категория'
+    )
+
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name = 'Вакансия'
+        verbose_name_plural = 'Вакансии'
+        ordering = ['salary']
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=55)
+    description = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name
 
 class Company(models.Model):
     name_company = models.CharField(max_length=255)
@@ -25,6 +46,3 @@ class Company(models.Model):
     is_hunting = models.BooleanField(default=True)
     def __str__(self):
         return self.name_company
-
-
-
