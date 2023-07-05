@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="title" placeholder="title" value='{{ vacancy.title }}'><br><br>
+        <input type="text" name="text" placeholder="TEXT" value='{{ vacancy.text }}'><br><br>
+        <button>Изменить</button>
+    </form>
+
+{% endblock %}

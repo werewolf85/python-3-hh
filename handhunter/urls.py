@@ -34,6 +34,7 @@ urlpatterns = [
     path("resume-list/", resume_list),
     path("resume-info/<int:id>/", resume_info),
     path("my-resume/", my_resume, name='my-resume'),
+    path('resume-edit/<int:id>/', resume_edit, name='resume-edit'),
     path('search/', search, name='search'),
     path('add-resume/', add_resume, name='add-resume'),
     path('registration/', reg_view, name='reg'),
