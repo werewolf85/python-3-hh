@@ -45,5 +45,6 @@ class Company(models.Model):
     address = models.CharField(max_length=100)
     count_staff = models.IntegerField(null=True, blank=True)
     is_hunting = models.BooleanField(default=True)
+    created_at = models.DateTimeField(null=True, blank=True)
     def __str__(self):
         return self.name_company

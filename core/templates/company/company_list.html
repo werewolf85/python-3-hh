@@ -6,8 +6,8 @@
 
 {% block content %}
 <h1>Компании</h1>
-    {{ example }}
     <hr>
         {% for v in companies %}
-            <div>{{ v.name_company }} - {{ v.count_staff }}</div>
+            <div><a href="{% url 'company-info' v.id %}">{{ v.name_company }}</a>- {{ v.address }} - {{ v.count_staff }}</a></div>
         {% endfor %}
+{% endblock %}
