@@ -67,9 +67,10 @@ def resume_add_django_form(request):
     if request.method == "POST":
         form = ResumeForm(request.POST)
         if form.is_valid():
-            new_resume = form.save()
+            new_resume = form.save(commit=False)
             new_resume.worker = request.user.worker
-            return redirect(f'/resume/{new_resume.id}/')
+            new_resume.save()
+            return redirect(f'/resume-info/{new_resume.id}/')
     resume_form = ResumeForm()
     return render(
         request,
