@@ -44,6 +44,8 @@ urlpatterns = [
     path('add-resume/', add_resume, name='add-resume'),
     path('add-resume-df/', resume_add_django_form, name='add-resume-df'),
     path('registration/', reg_view, name='reg'),
+    path('sign-in/', sign_in, name='sign-in'),
+    path('sign-out/', sign_out, name='sign-out'),
     path('companies/', company_list),
     path("company-edit-df/<int:id>/", company_edit, name="company-edit"),
     path("company/<int:id>/", company_info, name='company-info'),

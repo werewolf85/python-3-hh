@@ -5,7 +5,7 @@
     <form method="POST">
         {% csrf_token %}
         {{ company_form.as_p }}
-        <button>Добавить</button>
+        <button class="btn btn-danger">Создать</button>
     </form>
 
 {% endblock %}
