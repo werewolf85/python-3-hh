@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load django_bootstrap5 %}
 
     <form method="POST">
         {% csrf_token %}
-        {{ resume_form.as_p }}
-        <button>Добавить</button>
+        {% bootstrap_form resume_form %}
+        <button class="btn btn-danger">Создать</button>
     </form>
 
 {% endblock %}
