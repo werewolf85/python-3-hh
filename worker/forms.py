@@ -15,7 +15,8 @@ class ResumeEditForm(forms.ModelForm):
     class Meta:
         model = Resume
         fields = ['title',
-                  'text'
+                  'text',
+                  'profile_photo'
         ]
 
 

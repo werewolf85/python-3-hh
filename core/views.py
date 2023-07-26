@@ -1,14 +1,11 @@
 from django.shortcuts import render, HttpResponse, redirect
-from .models import Vacancy
-from .models import Company
+from .models import Vacancy, Company
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
-from django.contrib.auth import login
-from django.contrib.auth import logout
-from .forms import VacancyForm
-from .forms import VacancyEditForm
-from .forms import CompanyForm
-from .forms import CompanyEditForm
+from django.contrib.auth import login, logout
+from .forms import VacancyForm, VacancyEditForm
+from .forms import CompanyForm, CompanyEditForm
+from .filters import VacancyFilter
 
 # Create your views here.
 def homepage(request):
@@ -38,7 +35,7 @@ def address(request):
 
 def search(request):
     word = request.GET["keyword"]
-    vacancy_list = Vacancy.objects.filter(title__contains=word)
+    vacancy_list = Vacancy.objects.filter(title__icontains=word)
     context = {"vacancies": vacancy_list}
     return render(request, 'vacancy_list.html', context)
 
@@ -92,9 +89,11 @@ def vacancy_add_via_django_form(request):
         {"vacancy_form": vacancy_form}
     )
 def vacancy_list(request):
-    vacancies = Vacancy.objects.all()
-    context = {"vacancies": vacancies}
+    # vacancies = Vacancy.objects.all()
+    # context = {"vacancies": vacancies}
     # context["example"] = "hello"
+    vacancy_filter = VacancyFilter(request.GET, queryset=Vacancy.objects.all())
+    context = {"vacancy_filter": vacancy_filter}
     return render(request, 'vacancy/vacancy_list.html', context)
 
 def vacancy_detail(request, id):

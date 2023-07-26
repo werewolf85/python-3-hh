@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Vacancy, Company,Category
+from .models import Vacancy, Company, Category
 
 
 
