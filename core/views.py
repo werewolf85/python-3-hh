@@ -9,7 +9,12 @@ from .filters import VacancyFilter
 
 # Create your views here.
 def homepage(request):
-    return render(request=request, template_name="index.html")
+    if request.method == "POST":
+        return HttpResponse("Метод не разрешён, только GET", status=405)
+    context = {}
+    context["vacancies"] = Vacancy.objects.all()[:3]
+    context["companies"] = Company.objects.all()[:3]
+    return render(request=request, template_name="index.html", context=context)
 
 def about(request):
     return HttpResponse("Найдите работу или работника мечты")
