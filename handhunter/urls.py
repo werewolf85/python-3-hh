@@ -11,8 +11,8 @@ Class-based views
     1. Add an import:  from other_app.views import Home
     2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
 Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+    1. Import the include() function: from django.urls.py import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls.py'))
 """
 from django.contrib import admin
 from django.urls import path, include
@@ -21,6 +21,7 @@ from worker.views import *
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth.views import LoginView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -52,7 +53,9 @@ urlpatterns = [
     path("company-edit-df/<int:id>/", company_edit, name="company-edit"),
     path("company/<int:id>/", company_info, name='company-info'),
     path('add-company-df/', company_add_form, name='add-company-df'),
-    path('recruit/', include('recruit.urls'))
+    path('recruit/', include('recruit.urls')),
+    path('news/', include('news.urls'), name='news'),
+
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

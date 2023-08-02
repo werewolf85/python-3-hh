@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>{{ article.title }}</h1>
+    <p>{{ article.text }}</p>
+    <p>Автор: {{ article.author }}</p>
+    <p>Создана: {{ article.created_at }}</p>
+    <p>Обновлена: {{ article.updated_at }}</p>
+    <p>Кол-во просмотров: {{ article.views_count }}</p>
+    <p>Кол-во лаков: {{ article.likes_users.count }}</p>
+    <a href="{% url 'article-update' article.pk %}">Изменить</a>
+
+
+{% endblock %}

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'core',
     'worker',
     'recruit',
+    'news',
 
 ]
 
@@ -57,7 +58,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'handhunter.urls'
+ROOT_URLCONF = 'handhunter.urls.py'
 
 TEMPLATES = [
     {

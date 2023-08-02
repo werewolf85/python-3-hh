@@ -49,3 +49,4 @@ class Company(models.Model):
     created_at = models.DateTimeField(null=True, blank=True)
     def __str__(self):
         return self.name_company
+
